@@ -45,10 +45,10 @@ public class Player : MonoBehaviour
         transform.Rotate(Vector3.up, mouseX * _cameraSensitivity);
         if (_mainCamera != null)
         {
-            _mainCamera.transform.Rotate(Vector3.right, -mouseY * _cameraSensitivity, Space.Self); 
             Vector3 cameraRotation = _mainCamera.transform.localEulerAngles;
-            cameraRotation.x = Mathf.Clamp(cameraRotation.x, 5f, 28f);
-            _mainCamera.transform.localRotation = Quaternion.Euler(cameraRotation);
+            cameraRotation.x -= mouseY * _cameraSensitivity;
+            cameraRotation.x = Mathf.Clamp(cameraRotation.x, 0f, 28f);
+            _mainCamera.transform.localRotation = Quaternion.AngleAxis(cameraRotation.x, Vector3.right);
         }
     }
 
